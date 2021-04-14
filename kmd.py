@@ -4,7 +4,6 @@ from queue import Queue
 import time
 
 
-
 def dload_submission_media(q_in, return_list, q_out):
     """
     :param q_in: Input queue. Contains tuples in the format (index, filename)
@@ -47,7 +46,6 @@ try:
     with open("config", "r") as config_file:
         previous_config = config_file.read()
     previous_config = previous_config.split(",")
-    print(previous_config)
     username = previous_config[0]
     dest_folder = previous_config[1]
     token = previous_config[2]
@@ -103,18 +101,17 @@ layout = [
     ],
 ]
 
-if getattr(sys, 'frozen', False):           # If app is running frozen
-    application_path = sys._MEIPASS         # Set the .exe tempfolder as the path (need to pack the icon when building exe)
-elif __file__:
-    application_path = os.path.dirname(__file__)
 
-iconfile = "kobo.ico"
-iconpath = os.path.join(application_path, iconfile)                 # Absolute path of the icon
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
+
+iconpath = resource_path("kobo.ico")
 title = "Kobo Media Downloader"
 window = sg.Window(title, layout)
 window.set_icon(iconpath)
-dest_folder = ""
 
 
 def pbar_update():
