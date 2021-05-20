@@ -1,0 +1,6 @@
+/config
+/Temp
+/.vscode
+/.idea
+/__pycache__
+/venv

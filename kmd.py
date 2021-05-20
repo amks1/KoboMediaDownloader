@@ -52,7 +52,7 @@ try:
     server_kobo = (previous_config[3] == "True")
     server_ocha = (previous_config[4] == "True")
     overwrite = (previous_config[5] == "True")
-except FileNotFoundError:
+except:
     username = ""
     dest_folder = ""
     token = ""
